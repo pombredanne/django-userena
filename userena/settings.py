@@ -6,6 +6,10 @@ from django.conf import settings
 gettext = lambda s: s
 
 
+USERENA_SIGNIN_AFTER_SIGNUP = getattr(settings,
+                                      'USERENA_SIGNIN_AFTER_SIGNUP',
+                                      False)
+
 USERENA_REDIRECT_ON_SIGNOUT = getattr(settings,
                                       'USERENA_REDIRECT_ON_SIGNOUT',
                                       None)
@@ -43,9 +47,17 @@ USERENA_FORBIDDEN_USERNAMES = getattr(settings,
                                       ('signup', 'signout', 'signin',
                                        'activate', 'me', 'password'))
 
+USERENA_USE_HTTPS = getattr(settings,
+                            'USERENA_USE_HTTPS',
+                            False)
+
 USERENA_MUGSHOT_GRAVATAR = getattr(settings,
                                    'USERENA_MUGSHOT_GRAVATAR',
                                    True)
+
+USERENA_MUGSHOT_GRAVATAR_SECURE = getattr(settings,
+                                          'USERENA_MUGSHOT_GRAVATAR_SECURE',
+                                          USERENA_USE_HTTPS)
 
 USERENA_MUGSHOT_DEFAULT = getattr(settings,
                                   'USERENA_MUGSHOT_DEFAULT',
@@ -55,13 +67,13 @@ USERENA_MUGSHOT_SIZE = getattr(settings,
                                'USERENA_MUGSHOT_SIZE',
                                80)
 
+USERENA_MUGSHOT_CROP_TYPE = getattr(settings,
+                                    'USERENA_MUGSHOT_CROP_TYPE',
+                                    'smart')
+
 USERENA_MUGSHOT_PATH = getattr(settings,
                                'USERENA_MUGSHOT_PATH',
                                'mugshots/')
-
-USERENA_USE_HTTPS = getattr(settings,
-                            'USERENA_USE_HTTPS',
-                            False)
 
 USERENA_DEFAULT_PRIVACY = getattr(settings,
                                   'USERENA_DEFAULT_PRIVACY',
@@ -82,3 +94,11 @@ USERENA_LANGUAGE_FIELD = getattr(settings,
 USERENA_WITHOUT_USERNAMES = getattr(settings,
                                     'USERENA_WITHOUT_USERNAMES',
                                     False)
+
+USERENA_PROFILE_DETAIL_TEMPLATE = getattr(
+    settings, 'USERENA_PROFILE_DETAIL_TEMPLATE', 'userena/profile_detail.html')
+
+USERENA_PROFILE_LIST_TEMPLATE = getattr(
+    settings, 'USERENA_PROFILE_LIST_TEMPLATE', 'userena/profile_list.html')
+
+USERENA_HIDE_EMAIL = getattr(settings, 'USERENA_HIDE_EMAIL', False)

@@ -10,6 +10,21 @@ Userena.
 Userena settings
 ----------------
 
+USERENA_SIGNIN_AFTER_SIGNUP
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Default ``False`` (integer)
+
+Boolean that defines if a user should be logged in after a successful sign up.
+
+If True, USERENA_ACTIVATION_REQUIRED must be False for the sign-in to happen.
+
+Note that USERENA_SIGNIN_REDIRECT_URL will not be respected for the automatic sign-in.
+The user will be redirect to the value of 'success_url' in userena.views.signup.
+
+You can override 'success_url' in your urls.py. See the "How do I add extra fields to forms?"
+example in the FAQ, where the 'signup_form' variable is overridden.
+
+
 USERENA_SIGNIN_REDIRECT_URL
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Default ``/accounts/%(username)s/'`` (string)
@@ -36,7 +51,7 @@ USERENA_ACTIVATION_NOTIFY
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 Default: ``True`` (boolean)
 
-A boolean that turns on/of the sending of a notification when
+A boolean that turns on/off the sending of a notification when
 ``USERENA_ACTIVATION_NOTIFY_DAYS`` away the activation of the user will
 expire and the user will be deleted.
 
@@ -79,6 +94,13 @@ Default: ``True`` (boolean)
 A boolean defining if mugshots should fallback to `Gravatar
 <http://en.gravatar.com/>`_ service when no mugshot is uploaded by the user.
 
+USERENA_MUGSHOT_GRAVATAR_SECURE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Default: ``USERENA_USE_HTTPS`` (boolean)
+
+A boolean defining if the secure URI of Gravatar is used. Defaults to
+the same value as ``USERENA_USE_HTTPS``.
+
 USERENA_MUGSHOT_DEFAULT
 ~~~~~~~~~~~~~~~~~~~~~~~
 Default: ``identicon`` (string)
@@ -117,6 +139,20 @@ Default: ``mugshots/`` (string)
 The default path that the mugshots will be saved to. Is appended to the
 ``MEDIA_PATH`` in your Django settings.
 
+You can use the following options as arguments (f.ex. ``mugshots/%(username)s/``):
+
+``id``
+	User.id
+
+``username``
+	User.username
+
+``date``
+	User.date_joined
+
+``date_now``
+	Current date
+
 USERENA_USE_HTTPS
 ~~~~~~~~~~~~~~~~~
 Default: ``False`` (boolean)
@@ -139,6 +175,20 @@ options:
 
 ``open``
     All users (registered and anonymous) can view their profile.
+
+USERENA_PROFILE_DETAIL_TEMPLATE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Default: ``userena/profile_detail.html`` (string)
+
+Template to use for rendering user profiles. This allows you to specify a
+template in your own project which extends ``userena/profile_detail.html``.
+
+USERENA_PROFILE_LIST_TEMPLATE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Default: ``userena/profile_list.html`` (string)
+
+Template to use for rendering users list. This allows you to specify a
+template in your own project which extends ``userena/profile_list.html``.
 
 USERENA_DISABLE_PROFILE_LIST
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -168,6 +218,12 @@ Default: ``False`` (boolean)
 Defines if usernames are used within userena. Currently it's often for the
 users convenience that only an email is used for identification. With this
 setting you get just that.
+
+USERENA_HIDE_EMAIL
+~~~~~~~~~~~~~~~~~~
+Default: ``False`` (boolean)
+
+Prevents email addresses from being displayed to other users if set to ``True``.
 
 Django settings
 ---------------
